@@ -11,6 +11,14 @@
 **.js
 **.js.map
 **.html
+**.json
+**.css
+**.scss
+
+# Exclude
+!webpack.config.js
+!webpack.config.prod.js
+!tsconfig.json
 
 #misc
 .DS_Store
