@@ -1,5 +1,7 @@
 import { RequestHandler } from "express";
 import generate_enums from "../utility/enums"
+import helper from '../helper/helper';
+import { Statusmessage } from "../utility/interface";
 
 /**
  * Middleware - Route Validation
@@ -8,18 +10,15 @@ import generate_enums from "../utility/enums"
  */
 const route_middleware: RequestHandler = async (req, res) => {
     try {
-        let status: number;
-        let message: string;
+        let result: Statusmessage;
 
         if (req.originalUrl === "/") {
-            status = generate_enums().Status_Code.Success;
-            message = "Andromeda Git Server";
+            result = helper.generate_status(generate_enums().Status_Code.Success, "Andromeda Git Server");
         }
         else {
-            status = generate_enums().Status_Code.NotFound;
-            message = "Service Not Found";
+            result = helper.generate_status(generate_enums().Status_Code.NotFound, "Service Not Found");
         }
-        res.status(status).send(message);
+        res.status(result.status).send(result.message);
     }
     catch (error) {
         res.status(error.esponse.status).send(error);

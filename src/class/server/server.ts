@@ -4,7 +4,8 @@ import compression from "compression";
 import express, { json, Express } from "express";
 import route_middleware from "../../middleware/route";
 import ProtoServer from "./proto_server"
-import ProtoServerInterface from "./interface"
+import { ProtoServerInterface, PortInterface } from "./interface"
+import router from "../../routes/route"
 
 /**
  * Class - Server
@@ -30,11 +31,14 @@ class Server extends ProtoServer implements ProtoServerInterface{
         app.use(helmet());
         app.use(compression());
 
+        // Attach Routes
+        app.use("/api/Git/", router);
+        
         //Custom Middelwares
         app.use(route_middleware);
         return app;
     }
-    start_server(PORT: string | number, app: Express) {
+    start_server(PORT: PortInterface, app: Express) {
         //Listener
         const express_server = app.listen(PORT, () => {
             console.log(`Listening on Port: ${PORT}`);
