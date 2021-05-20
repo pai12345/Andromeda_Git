@@ -1,9 +1,6 @@
 import { Express } from "express"
 
-export interface PortInterface{
-    PORT: string | number
-}
-export interface ProtoServerInterface {
+export interface ServerInterface {
     add_configuration(): Express
-    start_server(PORT: PortInterface, app: Express): void
+    start_server(PORT: string | number, app: Express): void
 }

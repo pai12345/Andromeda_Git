@@ -1,6 +1,6 @@
 import { RequestHandler } from "express";
 import generate_enums from "../utility/enums"
-import helper from '../helper/helper';
+import helper from '../class/helper/helper';
 import { Statusmessage } from "../utility/interface";
 
 /**

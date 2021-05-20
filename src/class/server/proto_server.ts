@@ -1,9 +1,9 @@
 import { Express } from "express"
-import { ProtoServerInterface, PortInterface } from "./interface"
+import { ServerInterface } from "./interface"
 
-abstract class ProtoServer implements ProtoServerInterface{
+abstract class ProtoServer implements ServerInterface{
     abstract add_configuration(): Express
-    abstract start_server(PORT: PortInterface, app: Express):void
+    abstract start_server(PORT: string | number, app: Express):void
 }
 
 export default ProtoServer

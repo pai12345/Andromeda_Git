@@ -1,28 +1,18 @@
 import { RequestHandler } from "express";
-import { Octokit } from "@octokit/core";
-import generate_enums from "../utility/enums"
-import helper from "../helper/helper"
+import generate_service from "../../service/service"
+import generate_enums from "../../utility/enums"
+import helper from "../../class/helper/helper"
 
 const Status_Code = generate_enums().Status_Code;
 
 //Hanlder for user repositories
 const user_repos: RequestHandler = async (req, res, _next) => {
     try {
-        let result;
-        const octokit = new Octokit();
         const get_url = helper.generate_url("user_repos", req.body.user);
+        const username = { username: "username" };
         
-        const { status, message } = get_url;
-        
-        if (status === Status_Code.Success) {
-            result = await octokit.request(`${message}`, {
-                username: 'username'
-            })
-        }
-        else {
-            result = message
-        }
-        res.status(status).send(result);
+        const result = await generate_service().parameterized_service(get_url, username);
+        res.status(result.status).send(result.message);
     }
     catch (error) {
         res.status(Status_Code.ServerError).send(error);

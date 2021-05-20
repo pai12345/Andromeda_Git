@@ -1,9 +1,10 @@
-const PORT = process.env.PORT || 8000;
-
+//Generate Config Data
 const generateEnv = () => {
-    return {
-      PORT: PORT
-    };
+  const PORT = process.env.PORT || 8000;
+  
+  return {
+    PORT: PORT
   };
+};
   
 export default generateEnv;
